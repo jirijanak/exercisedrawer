@@ -15,6 +15,7 @@
  */
 package gui;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -57,5 +58,10 @@ public class ExerciseDrawerApp extends SingleFrameApplication {
         }
         
         launch(ExerciseDrawerApp.class, args);        
+    }
+
+    public BufferedImage getImage(File openFile) {
+        ExerciseDrawerView edv = new ExerciseDrawerView(this,openFile);
+        return edv.getImage();
     }
 }

@@ -24,6 +24,9 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -172,6 +175,7 @@ public class ExerciseDrawerView extends FrameView {
         backRunLineButton = new javax.swing.JButton();
         backRunLineArrowButton = new javax.swing.JButton();
         colorButton = new javax.swing.JButton();
+        sponsorLabel = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
@@ -554,21 +558,34 @@ public class ExerciseDrawerView extends FrameView {
             }
         });
 
+        sponsorLabel.setIcon(resourceMap.getIcon("sponsorLabel.icon")); // NOI18N
+        sponsorLabel.setText(resourceMap.getString("sponsorLabel.text")); // NOI18N
+        sponsorLabel.setName("sponsorLabel"); // NOI18N
+        sponsorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sponsorLabelMouseClicked(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout buttonsPanelLayout = new org.jdesktop.layout.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(buttonsPanelLayout.createSequentialGroup()
-                .add(buttonsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, colorButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, buttonsPanelLayout.createSequentialGroup()
-                        .add(fieldLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(fieldComboBox, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, deleteButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, itemsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, playersPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, linesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(buttonsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(buttonsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, colorButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, buttonsPanelLayout.createSequentialGroup()
+                            .add(fieldLabel)
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(fieldComboBox, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, deleteButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, itemsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, playersPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, linesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(buttonsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(sponsorLabel)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttonsPanelLayout.setVerticalGroup(
@@ -588,7 +605,9 @@ public class ExerciseDrawerView extends FrameView {
                 .add(deleteButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(colorButton)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(sponsorLabel)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         contentPanel.setAlignmentX(0.0F);
@@ -686,7 +705,7 @@ public class ExerciseDrawerView extends FrameView {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(descriptionLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(descriptionScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .add(descriptionScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1246,7 +1265,7 @@ public class ExerciseDrawerView extends FrameView {
             } else {
                 allowRewrite = true;
             }
-            
+
             //save file
             if (allowRewrite) {
                 XMLConvertor exml = new XMLConvertor();
@@ -1362,7 +1381,7 @@ public class ExerciseDrawerView extends FrameView {
         ImageIcon pane = new ImageIcon();
         pane.setImage(iconImage);
         colorButton.setIcon(pane);
-        
+
     }//GEN-LAST:event_colorButtonActionPerformed
 
     private void copyVerticalMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyVerticalMenuItemActionPerformed
@@ -1476,11 +1495,11 @@ public class ExerciseDrawerView extends FrameView {
         }
 
         this.exercise = copyExercise;
-        this.paintExercise();        
+        this.paintExercise();
     }//GEN-LAST:event_copyMirrorMenuItemActionPerformed
 
     private int exportToPortal(String username, String password) {
-/*
+        /*
         //save exercise to file
         File temp = new File("D:\\temp.xml");
         temp.setWritable(true);
@@ -1489,79 +1508,79 @@ public class ExerciseDrawerView extends FrameView {
         //load file to string
         StringBuilder xmlString = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(temp));
-            String str;
-            while ((str = in.readLine()) != null) {
-                xmlString.append(str);
-                xmlString.append("\n");
-            }
-            in.close();
+        BufferedReader in = new BufferedReader(new FileReader(temp));
+        String str;
+        while ((str = in.readLine()) != null) {
+        xmlString.append(str);
+        xmlString.append("\n");
+        }
+        in.close();
         } catch (IOException e) {
-            System.err.println(e);
+        System.err.println(e);
         }
         String xml = xmlString.toString();
         //delete temp file
         temp.delete();
         try { 
-            // Call Web Service Operation
-            webservice.ExerciseDrawerWSServiceService service = new webservice.ExerciseDrawerWSServiceService();
-            webservice.ExerciseDrawerWSService port = service.getExerciseDrawerWSServicePort();
-            // TODO process result here
-            int result = port.saveToServer(username, password, xml);
-            return result;
+        // Call Web Service Operation
+        webservice.ExerciseDrawerWSServiceService service = new webservice.ExerciseDrawerWSServiceService();
+        webservice.ExerciseDrawerWSService port = service.getExerciseDrawerWSServicePort();
+        // TODO process result here
+        int result = port.saveToServer(username, password, xml);
+        return result;
         } catch (Exception ex) {
-            System.err.println(ex);
+        System.err.println(ex);
         }
-*/
+         */
         return -1;
     }
-    
+
     private void exportToPortalMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportToPortalMenuItemActionPerformed
         String username = JOptionPane.showInputDialog("What is your USERNAME:");
         if (username != null && !username.equals("")) {
             String password = JOptionPane.showInputDialog("What is your PASSWORD:");
             if (password != null && !password.equals("")) {
-                int result = exportToPortal(username,password);
+                int result = exportToPortal(username, password);
                 if (result > 0) {
-                    JOptionPane.showMessageDialog(this.getFrame(), "Exercise exported\nID: "+result, "Message", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this.getFrame(), "Exercise exported\nID: " + result, "Message", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this.getFrame(), "Export failed", "Message", JOptionPane.ERROR_MESSAGE);                
+                    JOptionPane.showMessageDialog(this.getFrame(), "Export failed", "Message", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
     }//GEN-LAST:event_exportToPortalMenuItemActionPerformed
 
     public boolean importFromPortal(int exerciseId) {
-/*
+        /*
         try { 
-            // Call Web Service Operation
-            webservice.ExerciseDrawerWSServiceService service = new webservice.ExerciseDrawerWSServiceService();
-            webservice.ExerciseDrawerWSService port = service.getExerciseDrawerWSServicePort();
-            //process result here
-            String result = port.loadFromServer(exerciseId);
-            if (result != null && !result.equals("")) {
-                File temp = new File("temp.xml");
-                temp.setWritable(true);
-                try {
-                    FileOutputStream fout = new FileOutputStream(temp);
-                    OutputStreamWriter osw = new OutputStreamWriter(fout, "UTF-8");
-                    BufferedWriter out = new BufferedWriter(osw);
-                    out.write(result);
-                    out.close();
-                } catch (IOException e) {
-                    System.err.println(e);
-                }
-                this.openExerciseFile(temp);
-                temp.delete();
-                return true;
-            } 
-        } catch (Exception ex) {
-            System.err.println(ex);
+        // Call Web Service Operation
+        webservice.ExerciseDrawerWSServiceService service = new webservice.ExerciseDrawerWSServiceService();
+        webservice.ExerciseDrawerWSService port = service.getExerciseDrawerWSServicePort();
+        //process result here
+        String result = port.loadFromServer(exerciseId);
+        if (result != null && !result.equals("")) {
+        File temp = new File("temp.xml");
+        temp.setWritable(true);
+        try {
+        FileOutputStream fout = new FileOutputStream(temp);
+        OutputStreamWriter osw = new OutputStreamWriter(fout, "UTF-8");
+        BufferedWriter out = new BufferedWriter(osw);
+        out.write(result);
+        out.close();
+        } catch (IOException e) {
+        System.err.println(e);
         }
- */
+        this.openExerciseFile(temp);
+        temp.delete();
+        return true;
+        }
+        } catch (Exception ex) {
+        System.err.println(ex);
+        }
+         */
         return false;
     }
-    
+
     private void importFromPortalMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFromPortalMenuItemActionPerformed
         String exerciseId = JOptionPane.showInputDialog("What is ID of Exercise you want to import:");
         if (exerciseId != null && !exerciseId.equals("")) {
@@ -1569,11 +1588,30 @@ public class ExerciseDrawerView extends FrameView {
             if (importFromPortal(exId)) {
                 JOptionPane.showMessageDialog(this.getFrame(), "Exercise imported", "Message", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this.getFrame(), "Import failed", "Message", JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(this.getFrame(), "Import failed", "Message", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_importFromPortalMenuItemActionPerformed
 
+    private void sponsorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sponsorLabelMouseClicked
+
+        if (java.awt.Desktop.isDesktopSupported()) {
+            java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+            if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+                java.net.URI uri;
+                try {
+                    uri = new java.net.URI("http://www.lexx.cool/");
+                    desktop.browse(uri);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(ExerciseDrawerView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ExerciseDrawerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_sponsorLabelMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backRunLineArrowButton;
     private javax.swing.JButton backRunLineButton;
@@ -1625,6 +1663,7 @@ public class ExerciseDrawerView extends FrameView {
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton shootLineArrowButton;
     private javax.swing.JButton shootLineButton;
+    private javax.swing.JLabel sponsorLabel;
     private javax.swing.JButton squarePlayerButton;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
@@ -1896,5 +1935,9 @@ public class ExerciseDrawerView extends FrameView {
                 }
             }
         }
+    }
+
+    protected BufferedImage getImage() {
+        return img;
     }
 }
