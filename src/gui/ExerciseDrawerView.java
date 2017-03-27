@@ -1601,7 +1601,7 @@ public class ExerciseDrawerView extends FrameView {
             if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
                 java.net.URI uri;
                 try {
-                    uri = new java.net.URI("http://www.lexx.cool/");
+                    uri = new java.net.URI("http://www.florbal.com/");
                     desktop.browse(uri);
                 } catch (URISyntaxException ex) {
                     Logger.getLogger(ExerciseDrawerView.class.getName()).log(Level.SEVERE, null, ex);
